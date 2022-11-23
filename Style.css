@@ -6,17 +6,12 @@ div.MovieHeaderImg{
 img.HeaderImg{
     width: 1750px;
 }
-h1{
-    margin-top: 355px;
-    position: relative;
-    left: 150px;
-    max-width: 250px;
-}
-h1.Tv{
-    margin-top: 355px;
-    position: relative;
-    left: 150px;
-    max-width: 250px;
+
+h1.HPopuler{
+
+
+    margin-left: 100px;
+
 }
 h3.Movie{
     position: relative;
