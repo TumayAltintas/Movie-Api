@@ -23,6 +23,7 @@ h3.Movie{
     float: right;
     right: 17px;
     background-image: url("img/RatingBack.png");
+    border-radius: 5px 5px 0 0;
 }
 div.Rectangle{
     position: absolute;
