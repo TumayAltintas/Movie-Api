@@ -6,19 +6,15 @@
     <link rel="stylesheet" href="Style.css">
 
 </head>
-<body style="background-color: aqua">
+<body>
 <div style="display: flex">
-
-        <div class="MovieHeaderImg">
-                <img class="HeaderImg" src="img/Header%20BG.png">
-                <div class="HeaderSeries">
-                    <img src="img/Boba%20Fett.png">
-                </div>
-                <div class="HeaderMovie">
-                    <img src="img/Spider-Man.png">
-                </div>
+    <div class="MovieHeaderImg">
+        <img class="HeaderImg" src="img/Header%20BG.png">
+        <div class="HeaderSeries" id="HeaderTv">
+        </div>
+        <div class="HeaderMovie" id="HeaderMovie">
+        </div>
     </div>
-
     <div class="Rectangle">
         <div class="ImgPopularTv">
             <img src="img/Popular%20TV%20Series.png">
@@ -29,11 +25,9 @@
         <img src="img/Rectangle%2010.png">
     </div>
 </div>
-
-
 <div>
     <h1>Populer Movies</h1>
-    <button id="btn">arttır</button>
+    <!--    <button id="btn">arttır</button>-->
     <main id="main">
         <div class="PopularMovieTop">
             <div class="MovieImage">
@@ -44,18 +38,20 @@
     </main>
 </div>
 <div>
-<!--    <second id="second">-->
-<!--        <h1>Populer Tv Series</h1>-->
-<!--        <div class="PopularMovieTop">-->
-<!--            <div class="MovieImage">-->
-<!--                <div class="Tv-info">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </second>-->
 </div>
-<!--<button onclick="arttır()">arttır</button>-->
+<div style="display: flex">
 
+    <img style="width: 100%; height: 50px" src="img/BotHeader.png">
+    <div style="width: 150px; position: absolute; margin-top: 15px; margin-left: 25px; color: white">
+        <a>Mikail Tümay Altıntaş</a>
+    </div>
+    <div style="position: absolute; right: 255px; margin-top: 15px;">
+        <a style="color: white" href="https://www.linkedin.com/in/t%C3%BCmay-alt%C4%B1nta%C5%9F-a5bba7209/">Linkedin</a>
+    </div>
+    <div style="position: absolute; right: 150px; margin-top: 15px;">
+        <a style="color: white" href="https://github.com/TumayAltintas/Movie-Api">GitHub</a>
+    </div>
+</div>
 </body>
 </html>
 <script src="js/script.js"></script>
