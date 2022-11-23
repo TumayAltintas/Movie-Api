@@ -12,21 +12,20 @@ const HeaderMovie = document.getElementById('HeaderMovie');
 
 let a = 0
 let b = 5
-// Header Start
+//////////////////////////////////////////////////////////////////////////////////////////// Top Header Start
 GetTopTvHeaderSeries(API_FOR_TV);
-
 function GetTopTvHeaderSeries(url) {
 	let RandomNumber = Math.floor(Math.random() * 10);
 	console.log(RandomNumber)
 	fetch(url).then(res => res.json()).then(data => {
-		return ShowTopTvHeaderSeries(data.results.slice(1, 2));
+		return ShowTopTvHeaderSeries(data.results.slice(1,2));
 	})
 }
 
 function ShowTopTvHeaderSeries(data) {
 	HeaderTv.innerHTML = '';
 	data.forEach(movie => {
-		const {poster_path, vote_average} = movie
+		const {poster_path,vote_average} = movie
 		const movieEl = document.createElement('div');
 		movieEl.classList.add('MovieImage');
 		movieEl.innerHTML = `
@@ -37,20 +36,19 @@ function ShowTopTvHeaderSeries(data) {
 		HeaderTv.appendChild(movieEl);
 	})
 }
-
-///
+//////////////////////////////////////////////////////////////////////////////////////////// Top Header Movie
 GetTopMovieHeader(API_FOR_MOVIES);
 
 function GetTopMovieHeader(url) {
 	fetch(url).then(res => res.json()).then(data => {
-		return ShowTopMovieHeader(data.results.slice(14, 15));
+		return ShowTopMovieHeader(data.results.slice(14,15));
 	})
 }
 
 function ShowTopMovieHeader(data) {
 	HeaderMovie.innerHTML = '';
 	data.forEach(movie => {
-		const {poster_path, vote_average} = movie
+		const {poster_path,vote_average} = movie
 		const movieEl = document.createElement('div');
 		movieEl.classList.add('MovieImage');
 		movieEl.innerHTML = `
@@ -61,9 +59,9 @@ function ShowTopMovieHeader(data) {
 		HeaderMovie.appendChild(movieEl);
 	})
 }
-// Header End
+//////////////////////////////////////////////////////////////////////////////////////////// Top Header End
 
-// Top Movies Start
+//Top Movies Start
 GetTopMovies(API_FOR_MOVIES);
 
 function GetTopMovies(url) {
@@ -78,10 +76,9 @@ function ShowTopMoves(data) {
 	data.forEach(movie => {
 		const {title, poster_path, vote_average} = movie
 		const movieEl = document.createElement('div');
-		movieEl.classList.add('MovieImage');
 		movieEl.innerHTML = `
 						<div>
-						<h3 style="color:darkblue;">${vote_average}/10</h3>	
+						<h3 class="Movie" style="color:darkblue;">${vote_average}/10</h3>	
 						</div>
 				<img class="MoviesImg"src="${IMG_URL + poster_path}">	           
 	                	<h4 style="color: darkblue">${title}</h4>`
@@ -89,12 +86,12 @@ function ShowTopMoves(data) {
 	})
 }
 
-// Top Tv Series Start
+//Top tv series Start
 GetTopTvSeries(API_FOR_TV);
 
 function GetTopTvSeries(url) {
 	fetch(url).then(res => res.json()).then(data => {
-		return ShowTopTvSeries(data.results.slice(0, 4));
+		return ShowTopTvSeries(data.results.slice(a, b));
 	})
 }
 
@@ -103,19 +100,14 @@ function ShowTopTvSeries(data) {
 	data.forEach(movie => {
 		const {name, poster_path, vote_average} = movie
 		const movieEl = document.createElement('div');
-		movieEl.classList.add('MovieImage');
 		movieEl.innerHTML = `
-					<div class="Tv-info">
-                        <img src="img/Rectangle%209.png">
-                    </div>
-					<h3 style="color:darkblue">${vote_average}</h3>
-						
-						
-				<img class="TvImg"src="${IMG_URL + poster_path}">
-	            	<div class="Tv-info">
-	                	<h3>${name}</h3>	             	                                          
-						</div>`
-
+								<div>
+							<h3 class="Movie" style="color:darkblue">${vote_average}/10</h3>		
+								</div>
+																		
+				<img class="MoviesImg"src="${IMG_URL + poster_path}">	            	
+	                	<h4 style="color: darkblue">${name}</h4>	             	                                          
+						`
 		second.appendChild(movieEl);
 	})
 }
