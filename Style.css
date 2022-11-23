@@ -22,6 +22,7 @@ h3.Movie{
     position: relative;
     float: right;
     right: 17px;
+    width: 50px;
     background: #24123A;
     border-radius: 4px 4px 0px 0px;
 }

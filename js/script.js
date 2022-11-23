@@ -78,7 +78,7 @@ function ShowTopMoves(data) {
 		const movieEl = document.createElement('div');
 		movieEl.innerHTML = `
 						<div>
-						<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0;" >${vote_average}/10</h3>	
+						<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; align-items: center" >${vote_average}/10</h3>	
 						</div>
 				<img class="MoviesImg"src="${IMG_URL + poster_path}">	           
 	                	<h4 style="color: darkblue">${title}</h4>`
@@ -102,7 +102,7 @@ function ShowTopTvSeries(data) {
 		const movieEl = document.createElement('div');
 		movieEl.innerHTML = `
 								<div class="RatingBack">
-							<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0">${vote_average}/10</h3>		
+							<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; align-items: center">${vote_average}/10</h3>		
 								</div>																	
 				<img class="MoviesImg"src="${IMG_URL + poster_path}">	            	
 	                	<h4 style="color: darkblue">${name}</h4>	             	                                          
