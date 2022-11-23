@@ -30,7 +30,7 @@ function ShowTopTvHeaderSeries(data) {
 		movieEl.classList.add('MovieImage');
 		movieEl.innerHTML = `
 				<div class="HeaderShowMovie">
-				<h3 style="color:white">${vote_average}/10</h3>	
+				<h3 style="color:black; margin: 0">${vote_average}/10</h3>	
 				</div>	
 				<img class="TvImg" src="${IMG_URL + poster_path}">`
 		HeaderTv.appendChild(movieEl);
@@ -53,7 +53,7 @@ function ShowTopMovieHeader(data) {
 		movieEl.classList.add('MovieImage');
 		movieEl.innerHTML = `
 				<div class="HeaderShowMovie">
-				<h3 style="color:white">${vote_average}/10</h3>	
+				<h3 style="color:black; margin: 0">${vote_average}/10</h3>	
 				</div>				
 				<img class="TvImg" src="${IMG_URL + poster_path}">`
 		HeaderMovie.appendChild(movieEl);
@@ -103,8 +103,7 @@ function ShowTopTvSeries(data) {
 		movieEl.innerHTML = `
 								<div class="RatingBack">
 							<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0">${vote_average}/10</h3>		
-								</div>
-																		
+								</div>																	
 				<img class="MoviesImg"src="${IMG_URL + poster_path}">	            	
 	                	<h4 style="color: darkblue">${name}</h4>	             	                                          
 						`
