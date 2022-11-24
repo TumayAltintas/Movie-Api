@@ -38,6 +38,7 @@ function ShowTopTvHeaderSeries(data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////// Top Header Movie
 GetTopMovieHeader(API_FOR_MOVIES);
+let h = 0;
 
 function GetTopMovieHeader(url) {
 	fetch(url).then(res => res.json()).then(data => {

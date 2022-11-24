@@ -160,7 +160,7 @@ div.MovieDate {
     position: absolute;
     color: white;
     margin-top: 15px;
-    margin-left: 65%;
+    margin-left: 70%;
     font-family: Arial Black;
 
 }
@@ -168,6 +168,7 @@ div.MovieDate {
 div.MovieOverly {
     position: absolute;
     margin-left: 40%;
+    margin-right: 10px;
     color: red;
     font-family: Calibri;
 }
