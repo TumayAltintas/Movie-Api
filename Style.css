@@ -202,6 +202,13 @@ div.MovieCast {
     font-family: Calibri;
 }
 
+div.HeaderWelcome{
+    position: absolute;
+    height: 20px;
+    left: 750px;
+    top: 35%;
+    color: white;
+}
 
 .overlay {
     display: revert;
