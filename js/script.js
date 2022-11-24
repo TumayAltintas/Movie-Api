@@ -82,15 +82,12 @@ function ShowTopMovieHeader(data) {
 //////////////////////////////////////////////////////////////////////////////////////////// Top Movies Start
 
 GetTopMovies(API_FOR_MOVIES);
-
-
 function GetTopMovies(url) {
 	fetch(url).then(res => res.json()).then(data => {
-		ShowTopMoves(data.results.slice(0, 5));
+		ShowTopMoves(data.results.slice(6, 11));
 	})
 
 }
-
 function ShowTopMoves(data) {
 	main.innerHTML = '';
 	data.forEach(movie => {
@@ -179,18 +176,62 @@ function ShowTopTvSeries(data) {
 							<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; align-items: center">${vote_average}/10</h3>		
 								</div>																	
 				<div style="margin: 2.5rem 1rem 3rem 0; display: flex">
-				<img  id="${id}"  class="TvImg" src="${IMG_URL + poster_path}">		
+				<img id="${id}" onclick="openNav1()" class="TvImg" src="${IMG_URL + poster_path}">		
 				<div class="NameTag">
 				<h4 class="MovieTvName" >${name}</h4>	
 						</div>  
 						</div>	             	                                          
 						`
 		second.appendChild(TvEl);
-
+		document.getElementById(id).addEventListener('click', () => {
+			openNav1(tv)
+		})
 
 	})
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////// Top tv series End
+function openNav1(tv) {
 
+	let id = tv.id
+	let over = tv.vote_average
+	let ListOfCast = [];
+	let ListOfGenres = [];
+	let Product_Companies = [];
+	fetch( BASE_URL + '/tv/' + id + '/credits?' + API_KEY).then(res => res.json()).then(data => {
+
+		for (let i = 0; i < data.cast.length; i++) {
+			let CastName = data.cast[i].name;
+			ListOfCast.push(CastName)
+		}
+	});
+
+	fetch( BASE_URL + '/tv/' + id +'?' +API_KEY).then(res => res.json()).then(data => {
+
+		let TvOverview = data.overview;
+		let TvBackdrop = data.backdrop_path;
+		for (let i = 0; i < data.genres.length; i++) {
+			let genresList = data.genres[i].name;
+			ListOfGenres.push(genresList)
+		}
+		for (let i = 0; i < data.production_companies.length; i++) {
+			let ProductionCompanies = data.production_companies[i].name;
+			Product_Companies.push(ProductionCompanies)
+		}
+		document.getElementById("myNav1").style.width = "100%";
+		document.getElementById('TvName').innerHTML = data.name
+		document.getElementById('TvGenres').innerHTML = ListOfGenres
+		document.getElementById('TvCast').innerHTML = ListOfCast
+		document.getElementById('TvOverly').innerHTML = over + '/10'
+		document.getElementById('TvDate').innerHTML = data.first_air_date
+		document.getElementById('TvCompany').innerHTML = Product_Companies
+		document.getElementById('TvImage').src = IMG_URL + TvBackdrop
+		document.getElementById('TvOverview').innerHTML = TvOverview
+
+	})
+}
+function closeNav1() {
+	document.getElementById("myNav1").style.width = "0%";
+}
 
 
