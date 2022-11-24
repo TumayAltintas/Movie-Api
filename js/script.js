@@ -29,6 +29,7 @@ function ShowTopTvHeaderSeries(data) {
 		movieEl.classList.add('MovieImage');
 		movieEl.innerHTML = `
 				<div class="HeaderShowMovie">
+				
 				<h3 style="color:black; margin: 0">${vote_average}/10</h3>	
 				</div>	
 				<img class="TvImg" src="${IMG_URL + poster_path}">`
@@ -190,7 +191,7 @@ function ShowTopTvSeries(data) {
 		const {name, poster_path, vote_average, id} = tv
 		const TvEl = document.createElement('div');
 		if (tv.vote_average > 8) {
-			TvEl.innerHTML = `<div>
+			TvEl.innerHTML = `	<div>
 							<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; align-items: center">${vote_average}/10</h3>		
 								</div>																	
 				<div style="margin: 2.5rem 1rem 3rem 0; display: flex">
