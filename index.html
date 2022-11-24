@@ -29,8 +29,8 @@
     <h1 class="HPopuler">Populer Movies</h1>
 </div>
 <div>
-        <button id="pre-btn" class="pre-btn" onclick=""><img src="img/arrow.png"></button>
-        <button id="nxt-btn" class="nxt-btn" onclick="yuksel(); "><img src="img/arrow.png" ></button>
+        <button id="pre-btn" class="pre-btn" onclick="MovieBefore()"><img src="img/arrow.png"></button>
+        <button id="nxt-btn" class="nxt-btn" onclick="MovieNext(); "><img src="img/arrow.png" ></button>
             <main id="main">
             </main>
 </div>
@@ -75,6 +75,8 @@
     <div style="margin: 355px 0 0 0;position: relative;left: 70px;max-width: 400px">
         <h1 class="HPopuler">Populer Tv Series</h1>
     </div>
+    <button id="pre-btn" class="pre-btn" onclick="TvBefore()"><img src="img/arrow.png"></button>
+    <button id="nxt-btn" class="nxt-btn" onclick="TvNext(); "><img src="img/arrow.png" ></button>
     <second id="second">
     </second>
 </div>

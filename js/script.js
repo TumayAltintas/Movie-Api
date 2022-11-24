@@ -66,11 +66,16 @@ function ShowTopMovieHeader(data) {
 //////////////////////////////////////////////////////////////////////////////////////////// Top Movies Start
 let a = 0;
 let b = 5;
+GetTopMovies(API_FOR_MOVIES);
+function MovieBefore(){
+	a = 6;
+	b = 11 ;
+	GetTopMovies(API_FOR_MOVIES);
+}
+function MovieNext(){
+	a =0;
+	b =5 ;
 
-function yuksel(){
-	a +=5;
-	b +=5 ;
-	alert( 'a =>'+ a + " "+'b =>' +  b);
 	GetTopMovies(API_FOR_MOVIES);
 }
 
@@ -156,12 +161,25 @@ function closeNav() {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////// Top tv series Start
+let c = 0;
+let d = 5;
 GetTopTvSeries(API_FOR_TV);
+function  TvNext(){
+	c = 6;
+	d = 11 ;
+	GetTopTvSeries(API_FOR_TV);
+}
+function TvBefore(){
+	c =0;
+	d =5 ;
+
+	GetTopTvSeries(API_FOR_TV);
+}
 
 function GetTopTvSeries(url) {
 	fetch(url).then(res => res.json()).then(data => {
 
-		return ShowTopTvSeries(data.results.slice(0, 5));
+		return ShowTopTvSeries(data.results.slice(c, d));
 	})
 }
 
