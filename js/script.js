@@ -8,24 +8,23 @@ const main = document.getElementById('main');
 const second = document.getElementById('second');
 const HeaderTv = document.getElementById('HeaderTv');
 const HeaderMovie = document.getElementById('HeaderMovie');
+const BASE_URL = 'https://api.themoviedb.org/3/';
 
 
-let a = 0
-let b = 5
 //////////////////////////////////////////////////////////////////////////////////////////// Top Header Start
 GetTopTvHeaderSeries(API_FOR_TV);
+
 function GetTopTvHeaderSeries(url) {
-	let RandomNumber = Math.floor(Math.random() * 10);
-	console.log(RandomNumber)
+
 	fetch(url).then(res => res.json()).then(data => {
-		return ShowTopTvHeaderSeries(data.results.slice(1,2));
+		return ShowTopTvHeaderSeries(data.results.slice(1, 2));
 	})
 }
 
 function ShowTopTvHeaderSeries(data) {
 	HeaderTv.innerHTML = '';
 	data.forEach(movie => {
-		const {poster_path,vote_average} = movie
+		const {poster_path, vote_average} = movie
 		const movieEl = document.createElement('div');
 		movieEl.classList.add('MovieImage');
 		movieEl.innerHTML = `
@@ -36,19 +35,20 @@ function ShowTopTvHeaderSeries(data) {
 		HeaderTv.appendChild(movieEl);
 	})
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////// Top Header Movie
 GetTopMovieHeader(API_FOR_MOVIES);
 
 function GetTopMovieHeader(url) {
 	fetch(url).then(res => res.json()).then(data => {
-		return ShowTopMovieHeader(data.results.slice(14,15));
+		return ShowTopMovieHeader(data.results.slice(14, 15));
 	})
 }
 
 function ShowTopMovieHeader(data) {
 	HeaderMovie.innerHTML = '';
 	data.forEach(movie => {
-		const {poster_path,vote_average} = movie
+		const {poster_path, vote_average} = movie
 		const movieEl = document.createElement('div');
 		movieEl.classList.add('MovieImage');
 		movieEl.innerHTML = `
@@ -60,73 +60,132 @@ function ShowTopMovieHeader(data) {
 		HeaderMovie.appendChild(movieEl);
 	})
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////// Top Header End
 
-//Top Movies Start
+const productContainers = [...document.querySelectorAll('.product-container')];
+const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
+const preBtn = [...document.querySelectorAll('.pre-btn')];
+
+productContainers.forEach((item, i) => {
+	let containerDimensions = item.getBoundingClientRect();
+	let containerWidth = containerDimensions.width;
+
+	nxtBtn[i].addEventListener('click', () => {
+		item.scrollLeft += containerWidth;
+	})
+
+	preBtn[i].addEventListener('click', () => {
+		item.scrollLeft -= containerWidth;
+	})
+})
+//////////////////////////////////////////////////////////////////////////////////////////// Top Movies Start
+
 GetTopMovies(API_FOR_MOVIES);
+let a = 0;
+let b = 5;
 
 function GetTopMovies(url) {
-
 	fetch(url).then(res => res.json()).then(data => {
-		return ShowTopMoves(data.results.slice(a, b));
+		ShowTopMoves(data.results.slice(0, 5));
 	})
+
 }
 
 function ShowTopMoves(data) {
 	main.innerHTML = '';
 	data.forEach(movie => {
-		const {title, poster_path, vote_average} = movie
+		const {title, poster_path, vote_average,id} = movie
 		const movieEl = document.createElement('div');
-		movieEl.innerHTML = `
+		movieEl.innerHTML = `						
 						<div>
 						<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; " >${vote_average}/10</h3>	
 						</div>
-				
 				<div style="margin: 2.5rem 1rem 0 0; display: flex">
-				<img class="TvImg" src="${IMG_URL + poster_path}">
+				<img id="${id}" onclick="openNav()" class="TvImg" src="${IMG_URL + poster_path}">
 				<div class="NameTag">
 				<h4 class="MovieTvName" >${title}</h4>	
-						</div>  
-							</div>
-				
-						
-						
-						       
+						</div>  															       
 	                	`
 		main.appendChild(movieEl);
+		document.getElementById(id).addEventListener('click', () => {
+			openNav(movie)
+		})
 	})
 }
 
-//Top tv series Start
+
+function openNav(movie) {
+	let id = movie.id
+	let over = movie.vote_average
+	let title = movie.title
+	let ListofCast = [];
+	let ListOfGenres = [];
+	let ListOfProductionCompanies = [];
+
+	fetch(BASE_URL + 'movie/' + id + '/credits?' + API_KEY).then(res => res.json()).then(data => {
+
+		for (let i = 0; i < data.cast.length; i++) {
+
+			let CastName = data.cast[i].name;
+			ListofCast.push(CastName)
+		}
+	});
+
+	fetch(BASE_URL + '/movie/' + id +'?' +API_KEY).then(res => res.json()).then(data => {
+		for (let i = 0; i < data.genres.length; i++) {
+			let genresList = data.genres[i].name;
+			ListOfGenres.push(genresList)
+		}
+		for (let i = 0; i < data.production_companies.length; i++) {
+			let ProductionCompanies = data.production_companies[i].name;
+			ListOfProductionCompanies.push(ProductionCompanies)
+		}
+		document.getElementById("myNav").style.width = "100%";
+		document.getElementById('MovieName').innerHTML = title
+		document.getElementById('MovieGenres').innerHTML = ListOfGenres
+		document.getElementById('MovieCast').innerHTML = ListofCast
+		document.getElementById('MovieOverly').innerHTML = over + '/10'
+		document.getElementById('MovieDate').innerHTML = data.release_date
+		document.getElementById('MvoieCompony').innerHTML = ListOfProductionCompanies
+		document.getElementById('MovieImage').src = IMG_URL + data.backdrop_path
+		document.getElementById('Movieoverview').innerHTML = data.overview
+
+	})
+}
+
+function closeNav() {
+	document.getElementById("myNav").style.width = "0%";
+}
+/////////////////////////////////////////////////////////////////////////////////////////// Top tv series Start
 GetTopTvSeries(API_FOR_TV);
 
 function GetTopTvSeries(url) {
 	fetch(url).then(res => res.json()).then(data => {
-		return ShowTopTvSeries(data.results.slice(a, b));
+
+		return ShowTopTvSeries(data.results.slice(0, 5));
 	})
 }
 
 function ShowTopTvSeries(data) {
 	second.innerHTML = '';
-	data.forEach(movie => {
-		const {name, poster_path, vote_average} = movie
-		const movieEl = document.createElement('div');
-		movieEl.innerHTML = `
-								<div class="RatingBack">
+	data.forEach(tv => {
+		const {name, poster_path, vote_average,id} = tv
+		const TvEl = document.createElement('div');
+		TvEl.innerHTML = `<div>
 							<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; align-items: center">${vote_average}/10</h3>		
 								</div>																	
 				<div style="margin: 2.5rem 1rem 3rem 0; display: flex">
-				<img class="TvImg" src="${IMG_URL + poster_path}">
+				<img  id="${id}"  class="TvImg" src="${IMG_URL + poster_path}">		
 				<div class="NameTag">
 				<h4 class="MovieTvName" >${name}</h4>	
 						</div>  
-							</div>	             	                                          
+						</div>	             	                                          
 						`
-		second.appendChild(movieEl);
+		second.appendChild(TvEl);
+
+
 	})
 }
-
-
-
 
 
