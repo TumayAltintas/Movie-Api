@@ -55,7 +55,8 @@ function ShowTopMovieHeader(data) {
 				<div class="HeaderShowMovie">
 				<h3 style="color:black; margin: 0">${vote_average}/10</h3>	
 				</div>				
-				<img class="TvImg" src="${IMG_URL + poster_path}">`
+				<img class="TvImg" src="${IMG_URL + poster_path}">
+`
 		HeaderMovie.appendChild(movieEl);
 	})
 }
@@ -78,10 +79,20 @@ function ShowTopMoves(data) {
 		const movieEl = document.createElement('div');
 		movieEl.innerHTML = `
 						<div>
-						<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; align-items: center" >${vote_average}/10</h3>	
+						<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; " >${vote_average}/10</h3>	
 						</div>
-				<img class="MoviesImg"src="${IMG_URL + poster_path}">	           
-	                	<h4 style="color: darkblue">${title}</h4>`
+				
+				<div style="margin: 2.5rem 1rem 0 0; display: flex">
+				<img class="TvImg" src="${IMG_URL + poster_path}">
+				<div class="NameTag">
+				<h4 class="MovieTvName" >${title}</h4>	
+						</div>  
+							</div>
+				
+						
+						
+						       
+	                	`
 		main.appendChild(movieEl);
 	})
 }
@@ -104,8 +115,12 @@ function ShowTopTvSeries(data) {
 								<div class="RatingBack">
 							<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; align-items: center">${vote_average}/10</h3>		
 								</div>																	
-				<img class="MoviesImg"src="${IMG_URL + poster_path}">	            	
-	                	<h4 style="color: darkblue">${name}</h4>	             	                                          
+				<div style="margin: 2.5rem 1rem 3rem 0; display: flex">
+				<img class="TvImg" src="${IMG_URL + poster_path}">
+				<div class="NameTag">
+				<h4 class="MovieTvName" >${name}</h4>	
+						</div>  
+							</div>	             	                                          
 						`
 		second.appendChild(movieEl);
 	})
