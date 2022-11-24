@@ -62,38 +62,26 @@ function ShowTopMovieHeader(data) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////// Top Header End
-
-// const productContainers = [...document.querySelectorAll('.product-container')];
-// const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
-// const preBtn = [...document.querySelectorAll('.pre-btn')];
-
-// productContainers.forEach((item, i) => {
-// 	let containerDimensions = item.getBoundingClientRect();
-// 	let containerWidth = containerDimensions.width;
-//
-// 	nxtBtn[i].addEventListener('click', () => {
-// 		item.scrollLeft += containerWidth;
-// 	})
-//
-// 	preBtn[i].addEventListener('click', () => {
-// 		item.scrollLeft -= containerWidth;
-// 	})
-// })
+let a = 0;
+let b = 5;
 //////////////////////////////////////////////////////////////////////////////////////////// Top Movies Start
 
 GetTopMovies(API_FOR_MOVIES);
+
 function GetTopMovies(url) {
 	fetch(url).then(res => res.json()).then(data => {
-		ShowTopMoves(data.results.slice(6, 11));
+		ShowTopMoves(data.results.slice(a, b));
 	})
 
 }
+
 function ShowTopMoves(data) {
 	main.innerHTML = '';
 	data.forEach(movie => {
-		const {title, poster_path, vote_average,id} = movie
+		const {title, poster_path, vote_average, id} = movie
 		const movieEl = document.createElement('div');
-		movieEl.innerHTML = `						
+		if (movie.vote_average > 8) {
+			movieEl.innerHTML = `						
 						<div>
 						<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; " >${vote_average}/10</h3>	
 						</div>
@@ -101,13 +89,16 @@ function ShowTopMoves(data) {
 				<img id="${id}" onclick="openNav()" class="TvImg" src="${IMG_URL + poster_path}">
 				<div class="NameTag">
 				<h4 class="MovieTvName" >${title}</h4>	
-						</div>  															       
+						</div>  																			       
 	                	`
-		main.appendChild(movieEl);
-		document.getElementById(id).addEventListener('click', () => {
-			openNav(movie)
-		})
+			main.appendChild(movieEl);
+			document.getElementById(id).addEventListener('click', () => {
+				openNav(movie)
+			})
+		}
+
 	})
+
 }
 
 
@@ -129,7 +120,7 @@ function openNav(movie) {
 		}
 	});
 
-	fetch(BASE_URL + '/movie/' + id +'?' +API_KEY).then(res => res.json()).then(data => {
+	fetch(BASE_URL + '/movie/' + id + '?' + API_KEY).then(res => res.json()).then(data => {
 		let MovieReleaseDate = data.release_date;
 		let MovieOverview = data.overview;
 		let MovieBackdrop = data.backdrop_path;
@@ -157,6 +148,7 @@ function openNav(movie) {
 function closeNav() {
 	document.getElementById("myNav").style.width = "0%";
 }
+
 /////////////////////////////////////////////////////////////////////////////////////////// Top tv series Start
 GetTopTvSeries(API_FOR_TV);
 
@@ -170,9 +162,10 @@ function GetTopTvSeries(url) {
 function ShowTopTvSeries(data) {
 	second.innerHTML = '';
 	data.forEach(tv => {
-		const {name, poster_path, vote_average,id} = tv
+		const {name, poster_path, vote_average, id} = tv
 		const TvEl = document.createElement('div');
-		TvEl.innerHTML = `<div>
+		if (tv.vote_average > 8) {
+			TvEl.innerHTML = `<div>
 							<h3 class="Movie" style="color: #FFFFFF; padding: 10px; margin: 0; align-items: center">${vote_average}/10</h3>		
 								</div>																	
 				<div style="margin: 2.5rem 1rem 3rem 0; display: flex">
@@ -182,10 +175,12 @@ function ShowTopTvSeries(data) {
 						</div>  
 						</div>	             	                                          
 						`
-		second.appendChild(TvEl);
-		document.getElementById(id).addEventListener('click', () => {
-			openNav1(tv)
-		})
+			second.appendChild(TvEl);
+			document.getElementById(id).addEventListener('click', () => {
+				openNav1(tv)
+			})
+		}
+
 
 	})
 }
@@ -198,7 +193,7 @@ function openNav1(tv) {
 	let ListOfCast = [];
 	let ListOfGenres = [];
 	let Product_Companies = [];
-	fetch( BASE_URL + '/tv/' + id + '/credits?' + API_KEY).then(res => res.json()).then(data => {
+	fetch(BASE_URL + '/tv/' + id + '/credits?' + API_KEY).then(res => res.json()).then(data => {
 
 		for (let i = 0; i < data.cast.length; i++) {
 			let CastName = data.cast[i].name;
@@ -206,7 +201,7 @@ function openNav1(tv) {
 		}
 	});
 
-	fetch( BASE_URL + '/tv/' + id +'?' +API_KEY).then(res => res.json()).then(data => {
+	fetch(BASE_URL + '/tv/' + id + '?' + API_KEY).then(res => res.json()).then(data => {
 
 		let TvOverview = data.overview;
 		let TvBackdrop = data.backdrop_path;
@@ -230,6 +225,7 @@ function openNav1(tv) {
 
 	})
 }
+
 function closeNav1() {
 	document.getElementById("myNav1").style.width = "0%";
 }
