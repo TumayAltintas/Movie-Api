@@ -147,7 +147,7 @@ div.MovieName {
 
 }
 
-div.MovieAçıklama {
+div.MovieOverview {
     position: relative;
     max-width: 1000px;
     color: white;
@@ -180,7 +180,7 @@ div.MovieGenres {
     color: white;
 }
 
-div.MvoieCompony {
+div.MovieCompany {
     position: relative;
     margin-left: 25%;
     margin-top: 100px;

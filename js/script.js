@@ -63,27 +63,26 @@ function ShowTopMovieHeader(data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////// Top Header End
 
-const productContainers = [...document.querySelectorAll('.product-container')];
-const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
-const preBtn = [...document.querySelectorAll('.pre-btn')];
+// const productContainers = [...document.querySelectorAll('.product-container')];
+// const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
+// const preBtn = [...document.querySelectorAll('.pre-btn')];
 
-productContainers.forEach((item, i) => {
-	let containerDimensions = item.getBoundingClientRect();
-	let containerWidth = containerDimensions.width;
-
-	nxtBtn[i].addEventListener('click', () => {
-		item.scrollLeft += containerWidth;
-	})
-
-	preBtn[i].addEventListener('click', () => {
-		item.scrollLeft -= containerWidth;
-	})
-})
+// productContainers.forEach((item, i) => {
+// 	let containerDimensions = item.getBoundingClientRect();
+// 	let containerWidth = containerDimensions.width;
+//
+// 	nxtBtn[i].addEventListener('click', () => {
+// 		item.scrollLeft += containerWidth;
+// 	})
+//
+// 	preBtn[i].addEventListener('click', () => {
+// 		item.scrollLeft -= containerWidth;
+// 	})
+// })
 //////////////////////////////////////////////////////////////////////////////////////////// Top Movies Start
 
 GetTopMovies(API_FOR_MOVIES);
-let a = 0;
-let b = 5;
+
 
 function GetTopMovies(url) {
 	fetch(url).then(res => res.json()).then(data => {
@@ -119,37 +118,41 @@ function openNav(movie) {
 	let id = movie.id
 	let over = movie.vote_average
 	let title = movie.title
-	let ListofCast = [];
+	let ListOfCast = [];
 	let ListOfGenres = [];
-	let ListOfProductionCompanies = [];
+	let Product_Companies = [];
+
 
 	fetch(BASE_URL + 'movie/' + id + '/credits?' + API_KEY).then(res => res.json()).then(data => {
 
 		for (let i = 0; i < data.cast.length; i++) {
 
 			let CastName = data.cast[i].name;
-			ListofCast.push(CastName)
+			ListOfCast.push(CastName)
 		}
 	});
 
 	fetch(BASE_URL + '/movie/' + id +'?' +API_KEY).then(res => res.json()).then(data => {
+		let MovieReleaseDate = data.release_date;
+		let MovieOverview = data.overview;
+		let MovieBackdrop = data.backdrop_path;
 		for (let i = 0; i < data.genres.length; i++) {
 			let genresList = data.genres[i].name;
 			ListOfGenres.push(genresList)
 		}
 		for (let i = 0; i < data.production_companies.length; i++) {
 			let ProductionCompanies = data.production_companies[i].name;
-			ListOfProductionCompanies.push(ProductionCompanies)
+			Product_Companies.push(ProductionCompanies)
 		}
 		document.getElementById("myNav").style.width = "100%";
 		document.getElementById('MovieName').innerHTML = title
 		document.getElementById('MovieGenres').innerHTML = ListOfGenres
-		document.getElementById('MovieCast').innerHTML = ListofCast
+		document.getElementById('MovieCast').innerHTML = ListOfCast
 		document.getElementById('MovieOverly').innerHTML = over + '/10'
-		document.getElementById('MovieDate').innerHTML = data.release_date
-		document.getElementById('MvoieCompony').innerHTML = ListOfProductionCompanies
-		document.getElementById('MovieImage').src = IMG_URL + data.backdrop_path
-		document.getElementById('Movieoverview').innerHTML = data.overview
+		document.getElementById('MovieDate').innerHTML = MovieReleaseDate
+		document.getElementById('MovieCompany').innerHTML = Product_Companies
+		document.getElementById('MovieImage').src = IMG_URL + MovieBackdrop
+		document.getElementById('MovieOverview').innerHTML = MovieOverview
 
 	})
 }
@@ -187,5 +190,7 @@ function ShowTopTvSeries(data) {
 
 	})
 }
+
+
 
 
