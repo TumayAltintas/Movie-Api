@@ -71,9 +71,9 @@ function yuksel(){
 	a +=5;
 	b +=5 ;
 	alert( 'a =>'+ a + " "+'b =>' +  b);
-
+	GetTopMovies(API_FOR_MOVIES);
 }
-GetTopMovies(API_FOR_MOVIES);
+
 function GetTopMovies(url) {
 	fetch(url).then(res => res.json()).then(data => {
 		ShowTopMoves(data.results.slice(a, b));
