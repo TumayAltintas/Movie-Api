@@ -70,7 +70,7 @@ let b = 5;
 function yuksel(){
 	a +=5;
 	b +=5 ;
-	alert(a + " " + b);
+	alert( 'a =>'+ a + " "+'b =>' +  b);
 
 }
 GetTopMovies(API_FOR_MOVIES);
